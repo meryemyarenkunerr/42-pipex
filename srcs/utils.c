@@ -2,7 +2,6 @@
 
 void	failure(char *error, char *file_cmd)
 {
-	ft_putstr_fd("bash: ", 2);
 	if (!ft_strncmp(error, "Pipe", 4))
 		perror(file_cmd);
 	else if (!ft_strncmp(error, "Fork", 4))
@@ -17,7 +16,12 @@ void	failure(char *error, char *file_cmd)
 		exit(127);
 	}
 	else if (!ft_strncmp(error, "Exec", 4))
-		perror(file_cmd);
+		perror(error);
+	else
+	{
+		ft_putstr_fd(error, 2);
+		ft_putstr_fd("Ex: ./pipex file1 cmd1 cmd2 file2\n", 2);
+	}
 	exit(EXIT_FAILURE);
 }
 
